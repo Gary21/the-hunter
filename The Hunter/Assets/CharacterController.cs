@@ -4,24 +4,45 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
-    float speed = 10f;
-    float jumpLimit = 10f;
+    public float speed = 5f;
+    public float jumpSpeed = 5f;
+    private float direction = 0f;
+    private Rigidbody2D player;
+
+    public Transform groundCheck;
+    public float groundCheckRadius;
+    public LayerMask groundLayer;
+    private bool isTouchingGround;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // What is the player doing with the controls?
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"),
-            Input.GetAxis("Vertical"), 0);
+        isTouchingGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        direction = Input.GetAxis("Horizontal");
 
-        // Update the ships position each frame
-        transform.position += move
-            * speed * Time.deltaTime;
+        if (direction > 0f)
+        {
+            player.velocity = new Vector2(direction * speed, player.velocity.y);
+        }
+        else if (direction < 0f)
+        {
+            player.velocity = new Vector2(direction * speed, player.velocity.y);
+        }
+        else
+        {
+            player.velocity = new Vector2(0, player.velocity.y);
+        }
+
+        if (Input.GetButtonDown("Jump") && isTouchingGround)
+        {
+            player.velocity = new Vector2(player.velocity.x, jumpSpeed);
+        }
+       
     }
 }
