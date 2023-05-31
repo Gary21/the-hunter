@@ -8,6 +8,9 @@ public class CharacterController : MonoBehaviour
     public float jumpSpeed = 5f;
     private float direction = 0f;
     private Rigidbody2D player;
+    private GameObject attackArea = default;
+    public float attackCooldown = 100.25f;
+    private float attackTimer = 0.0f;
     private bool isLookingRight = true;
     private bool isMoving = false;
     private bool isAttacking = false;
@@ -22,6 +25,7 @@ public class CharacterController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        attackArea = transform.Find("AttackArea").gameObject;
         player = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
     }
@@ -88,10 +92,29 @@ public class CharacterController : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             isAttacking = true;
+            attackArea.SetActive(isAttacking);
         }
         if (Input.GetButtonUp("Fire1"))
         {
             isAttacking = false;
+            attackArea.SetActive(isAttacking);
+        }
+
+        if (isAttacking)
+        {
+            attackTimer += Time.deltaTime;
+
+            if (attackTimer >= attackCooldown)
+            {
+                attackTimer = 0;
+                isAttacking = false;
+                attackArea.SetActive(isAttacking);
+            }
+        }
+        else
+        {
+            attackArea.SetActive(isAttacking);
+            attackTimer = 0.0f;
         }
     }
 }
