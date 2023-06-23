@@ -543,6 +543,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 60
   maxHealth: 100
+  baseHpRegen: 2
+  hpRegenMultiplier: 1
   flashEffect: {fileID: 285542784}
 --- !u!114 &285542784
 MonoBehaviour:
@@ -1020,6 +1022,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 15
+  baseHpRegen: 10
+  hpRegenMultiplier: 1
   flashEffect: {fileID: 798897854}
 --- !u!114 &798897854
 MonoBehaviour:
