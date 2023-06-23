@@ -9,7 +9,10 @@ public class MonsterController : MonoBehaviour
     private Rigidbody2D monster;
     private float direction = 0f;
     public Transform playerTransform;
-    // Start is called before the first frame update
+    float kbForce;
+    float kbCounter;
+    bool knockFromRight;
+    
     void Start()
     {
         monster = GetComponent<Rigidbody2D>();
@@ -27,8 +30,15 @@ public class MonsterController : MonoBehaviour
         {
             direction = 1;
         }
-        
-        MoveHandler();
+
+        if (kbCounter <= 0)
+        {
+            MoveHandler();
+        }
+        else
+        {
+            KnockbackHandler();
+        }
     }
     
     void MoveHandler()
@@ -58,5 +68,26 @@ public class MonsterController : MonoBehaviour
         {
             return monster.velocity.x + (velocity * direction * moveSpeed);
         }
+    }
+    
+    void KnockbackHandler()
+    {
+        if (knockFromRight)
+        {
+            monster.velocity = new Vector2(-kbForce, 0.2f * kbForce);
+        }
+        else
+        {
+            monster.velocity = new Vector2(kbForce, 0.2f * kbForce);
+        }
+
+        kbCounter -= Time.deltaTime;
+    }
+    
+    public void takeKnockback(float force, bool fromRight, float time = 0.25f)
+    {
+        knockFromRight = fromRight;
+        kbForce = force;
+        kbCounter = time;
     }
 }

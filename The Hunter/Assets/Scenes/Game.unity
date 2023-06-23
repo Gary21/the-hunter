@@ -257,9 +257,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.4, y: 0.5}
+    - - {x: 0.95, y: 0.5}
       - {x: 0, y: 0}
-      - {x: 0.4, y: -0.5}
+      - {x: 0.95, y: -0.5}
 --- !u!114 &105674148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,6 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
+  knockbackPower: 5
 --- !u!1 &171964389
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,7 +899,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  knockBackPower: 5
   health: {fileID: 285542783}
+  movement: {fileID: 285542780}
 --- !u!212 &798897849
 SpriteRenderer:
   m_ObjectHideFlags: 0

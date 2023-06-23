@@ -20,6 +20,10 @@ public class CharacterController : MonoBehaviour
     public LayerMask groundLayer;
     private bool isTouchingGround;
 
+    float kbForce;
+    float kbCounter;
+    bool knockFromRight;
+    
     private Animator playerAnimator;
 
     // Start is called before the first frame update
@@ -36,7 +40,15 @@ public class CharacterController : MonoBehaviour
         isTouchingGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         direction = Input.GetAxis("Horizontal");
 
-        MoveHandler();
+        if (kbCounter <= 0)
+        {
+            MoveHandler();
+        }
+        else
+        {
+            KnockbackHandler();
+        }
+        
         JumpHandler();
         AttackHandler();
 
@@ -73,6 +85,21 @@ public class CharacterController : MonoBehaviour
             player.velocity = new Vector2(0, player.velocity.y);
         }
     }
+
+    void KnockbackHandler()
+    {
+        if (knockFromRight)
+        {
+            player.velocity = new Vector2(-kbForce, 0.2f * kbForce);
+        }
+        else
+        {
+            player.velocity = new Vector2(kbForce, 0.2f * kbForce);
+        }
+
+        kbCounter -= Time.deltaTime;
+    }
+    
 
     void JumpHandler()
     {
@@ -116,5 +143,12 @@ public class CharacterController : MonoBehaviour
             attackArea.SetActive(isAttacking);
             attackTimer = 0.0f;
         }
+    }
+
+    public void takeKnockback(float force, bool fromRight, float time = 0.25f)
+    {
+        knockFromRight = fromRight;
+        kbForce = force;
+        kbCounter = time;
     }
 }
