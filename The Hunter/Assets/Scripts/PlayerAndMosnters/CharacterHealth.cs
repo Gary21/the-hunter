@@ -6,7 +6,7 @@ public class CharacterHealth : MonoBehaviour
 {
     public float currentHealth;
     public float maxHealth = 100;
-    public float baseHpRegen = 10;
+    public float baseHpRegen = 0;
     public float hpRegenMultiplier = 1.0f;
     [SerializeReference] private FlashEffect flashEffect;
     void Start()
