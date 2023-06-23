@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class CharacterHealth : MonoBehaviour
 {
-    public int currentHealth;
-    public int maxHealth = 100;
+    public float currentHealth;
+    public float maxHealth = 100;
+    public float baseHpRegen = 10;
+    public float hpRegenMultiplier = 1.0f;
     [SerializeReference] private FlashEffect flashEffect;
     void Start()
     {
@@ -15,7 +17,12 @@ public class CharacterHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        hpRegenHandler();
+    }
+
+    void hpRegenHandler()
+    {
+        currentHealth += baseHpRegen * hpRegenMultiplier * Time.deltaTime;
     }
 
     public void takeDamage(int damage)
