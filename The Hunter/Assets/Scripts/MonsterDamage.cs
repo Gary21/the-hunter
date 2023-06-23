@@ -6,7 +6,9 @@ using UnityEngine;
 public class MonsterDamage : MonoBehaviour
 {
     public int damage;
+    public float knockBackPower;
     public CharacterHealth health;
+    public CharacterController movement;
     
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,7 @@ public class MonsterDamage : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
+            movement.takeKnockback(knockBackPower, col.transform.position.x <= transform.position.x);
             health.takeDamage(damage);
         }
     }
