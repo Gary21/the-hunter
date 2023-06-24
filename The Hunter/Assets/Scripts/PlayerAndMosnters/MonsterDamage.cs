@@ -7,13 +7,14 @@ public class MonsterDamage : MonoBehaviour
 {
     public int damage;
     public float knockBackPower;
-    public CharacterHealth health;
-    public CharacterController movement;
+    private CharacterHealth health;
+    private CharacterController movement;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        health = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterHealth>();
+        movement = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
     }
 
     // Update is called once per frame

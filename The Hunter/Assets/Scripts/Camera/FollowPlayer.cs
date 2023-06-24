@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,12 +6,17 @@ using UnityEngine;
 public class FollowPlayer : MonoBehaviour
 {
     public float followSpeed = 2f;
-    public Transform player;
+    private Transform player;
     public float minX = -10000;
     public float maxX = 10000;
     public float minY = -10000;
     public float maxY = 10000;
-    
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
     void FixedUpdate()
     {
         Vector3 newPos = new Vector3(player.position.x, player.position.y, -10);
@@ -34,6 +40,6 @@ public class FollowPlayer : MonoBehaviour
             newPos.y = maxY;
         }
 
-            transform.position = Vector3.Slerp(transform.position, newPos, followSpeed * Time.deltaTime);
+        transform.position = Vector3.Slerp(transform.position, newPos, followSpeed * Time.deltaTime);
     }
 }

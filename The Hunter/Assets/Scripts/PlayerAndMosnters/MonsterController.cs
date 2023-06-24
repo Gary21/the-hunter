@@ -8,7 +8,7 @@ public class MonsterController : MonoBehaviour
     public float velocity;
     private Rigidbody2D monster;
     private float direction = 0f;
-    public Transform playerTransform;
+    private Transform playerTransform;
     float kbForce;
     float kbCounter;
     bool knockFromRight;
@@ -16,6 +16,7 @@ public class MonsterController : MonoBehaviour
     void Start()
     {
         monster = GetComponent<Rigidbody2D>();
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
