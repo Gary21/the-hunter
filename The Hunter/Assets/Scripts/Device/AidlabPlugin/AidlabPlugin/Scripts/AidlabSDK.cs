@@ -6,15 +6,19 @@ using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 
 namespace Aidlab
 {
     public class AidlabSDK : MonoBehaviour
     {
 
-        public static void init()  
+        public static void init()
         {
-            DontDestroyOnLoad(GameObject.Instantiate((UnityEngine.Object)Resources.Load("SDK"), Vector3.zero, Quaternion.identity));
+            var gameObject = GameObject.Instantiate((UnityEngine.Object)Resources.Load("SDK"), Vector3.zero,
+                Quaternion.identity);
+            gameObject.GameObject().SetActive(false);
+            DontDestroyOnLoad(gameObject);
         } 
 
         enum Signal
