@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DeviceController : MonoBehaviour
+public class PanelEvents : MonoBehaviour
 {
     [SerializeField] GameObject WearStateToggle;
     [SerializeField] GameObject HeartRateToggle;
@@ -14,53 +14,60 @@ public class DeviceController : MonoBehaviour
     [SerializeField] GameObject ECGPlotToggle;
     [SerializeField] GameObject ECGPeaksDotsToggle;
 
+    public DeviceSettings deviceSettings;
+
     private void Start()
     {
         Toggle toggle;
+        deviceSettings = DeviceSettings.LoadSettings("device_settings.json");
+        if(deviceSettings != null )
+            Debug.Log("jest plik!");
+        else
+            deviceSettings = new DeviceSettings();
 
         #region Toggles
         toggle = WearStateToggle.GetComponent<Toggle>();
         if (toggle != null)
             toggle.onValueChanged.AddListener(ReceiveWearState);
-        
+
         toggle = HeartRateToggle.GetComponent<Toggle>();
         if (toggle != null)
             toggle.onValueChanged.AddListener(ReceiveHR);
-        
+
         toggle = TemperatureToggle.GetComponent<Toggle>();
         if (toggle != null)
             toggle.onValueChanged.AddListener(ReceiveTemperature);
-        
+
         toggle = RespirationToggle.GetComponent<Toggle>();
         if (toggle != null)
             toggle.onValueChanged.AddListener(ReceiveRespiration);
-        
+
         toggle = RespirationRateToggle.GetComponent<Toggle>();
         if (toggle != null)
             toggle.onValueChanged.AddListener(ReceiveRespirationRate);
-        
+
         toggle = RRToggle.GetComponent<Toggle>();
         if (toggle != null)
             toggle.onValueChanged.AddListener(ReceiveRR);
-        
+
         toggle = PressureToggle.GetComponent<Toggle>();
         if (toggle != null)
             toggle.onValueChanged.AddListener(ReceivePressure);
-        
+
         toggle = OrientationToggle.GetComponent<Toggle>();
         if (toggle != null)
             toggle.onValueChanged.AddListener(ReceiveOrientation);
-        
+
         toggle = ECGPlotToggle.GetComponent<Toggle>();
         if (toggle != null)
             toggle.onValueChanged.AddListener(EnablePlotting);
-        
+
         toggle = ECGPeaksDotsToggle.GetComponent<Toggle>();
         if (toggle != null)
             toggle.onValueChanged.AddListener(EnablePlottingDetectedPeaks);
-        
+
         #endregion Toggles
-        
+
     }
 
     public void ReceiveWearState(bool doReceive)
@@ -68,30 +75,30 @@ public class DeviceController : MonoBehaviour
         if (doReceive)
         {
             Aidlab.AidlabSDK.aidlabDelegate.wearState.Subscribe(DeviceOnDataReceived.OnWearStateReceived);
-            //SettingsStructure.WearState = true;
+            deviceSettings.WearState = true;
         }
         else
         {
             Aidlab.AidlabSDK.aidlabDelegate.wearState.Unsubscribe(DeviceOnDataReceived.OnWearStateReceived);
-            //SettingsStructure.WearState = false;
+            deviceSettings.WearState = false;
         }
     }
     public void ReceiveHR(bool doReceive)
     {
-        if(doReceive)
+        if (doReceive)
         {
             GameObject ECGReceiver = new GameObject("ECGReceiver");
             GameObject.DontDestroyOnLoad(ECGReceiver);
 
             ECGReceiver.AddComponent<ECGReceiver>();
-            //SettingsStructure.HeartRate = true;
+            deviceSettings.HeartRate = true;
         }
         else
         {
             GameObject ECGReceiver = GameObject.Find("ECGReceiver");
-            if(ECGReceiver)
+            if (ECGReceiver)
                 GameObject.Destroy(ECGReceiver);
-            //SettingsStructure.HeartRate = false;
+            deviceSettings.HeartRate = false;
         }
     }
     public void ReceiveTemperature(bool doReceive)
@@ -99,38 +106,38 @@ public class DeviceController : MonoBehaviour
         if (doReceive)
         {
             Aidlab.AidlabSDK.aidlabDelegate.temperature.Subscribe(DeviceOnDataReceived.OnTemperatureReceived);
-            //SettingsStructure.Temperature = true;
+            deviceSettings.Temperature = true;
         }
         else
         {
             Aidlab.AidlabSDK.aidlabDelegate.temperature.Unsubscribe(DeviceOnDataReceived.OnTemperatureReceived);
-            //SettingsStructure.Temperature = false;
+            deviceSettings.Temperature = false;
         }
-    } 
+    }
     public void ReceiveRespiration(bool doReceive)
     {
         if (doReceive)
         {
             Aidlab.AidlabSDK.aidlabDelegate.respiration.Subscribe(DeviceOnDataReceived.OnRespirationReceived);
-            //SettingsStructure.Respiration = true;
+            deviceSettings.Respiration = true;
         }
         else
         {
             Aidlab.AidlabSDK.aidlabDelegate.respiration.Unsubscribe(DeviceOnDataReceived.OnRespirationReceived);
-            //SettingsStructure.Respiration = false;
+            deviceSettings.Respiration = false;
         }
-    } 
+    }
     public void ReceiveRespirationRate(bool doReceive)
     {
         if (doReceive)
         {
             Aidlab.AidlabSDK.aidlabDelegate.respirationRate.Subscribe(DeviceOnDataReceived.OnRespirationRateReceived);
-            //SettingsStructure.RespirationRate = true;
+            deviceSettings.RespirationRate = true;
         }
         else
         {
             Aidlab.AidlabSDK.aidlabDelegate.respirationRate.Unsubscribe(DeviceOnDataReceived.OnRespirationRateReceived);
-            //SettingsStructure.RespirationRate = false;            
+            deviceSettings.RespirationRate = false;            
         }
     }
     public void ReceiveRR(bool doReceive)
@@ -138,40 +145,40 @@ public class DeviceController : MonoBehaviour
         if (doReceive)
         {
             Aidlab.AidlabSDK.aidlabDelegate.rr.Subscribe(DeviceOnDataReceived.OnRRReceived);
-            //SettingsStructure.RR = true;
+            deviceSettings.RR = true;
         }
         else
         {
             Aidlab.AidlabSDK.aidlabDelegate.rr.Unsubscribe(DeviceOnDataReceived.OnRRReceived);
-            //SettingsStructure.RR = false;
+            deviceSettings.RR = false;
         }
-    } 
+    }
     public void ReceivePressure(bool doReceive)
     {
         if (doReceive)
         {
             Aidlab.AidlabSDK.aidlabDelegate.pressure.Subscribe(DeviceOnDataReceived.OnPressureReceived);
-            //SettingsStructure.Pressure = true;
+            deviceSettings.Pressure = true;
         }
         else
         {
             Aidlab.AidlabSDK.aidlabDelegate.pressure.Unsubscribe(DeviceOnDataReceived.OnPressureReceived);
-            //SettingsStructure.Pressure = false;
+            deviceSettings.Pressure = false;
         }
-    } 
+    }
     public void ReceiveOrientation(bool doReceive)
     {
         if (doReceive)
         {
             Aidlab.AidlabSDK.aidlabDelegate.orientation.Subscribe(DeviceOnDataReceived.OnOrientationReceived);
-            //SettingsStructure.Orientation = true;
+            deviceSettings.Orientation = true;
         }
         else
         {
             Aidlab.AidlabSDK.aidlabDelegate.orientation.Unsubscribe(DeviceOnDataReceived.OnOrientationReceived);
-            //SettingsStructure.Orientation = false;
+            deviceSettings.Orientation = false;
         }
-    } 
+    }
     public void EnablePlotting(bool doReceive)
     {
         if (doReceive)
@@ -188,7 +195,7 @@ public class DeviceController : MonoBehaviour
                 ECGReceiver.GetComponent<ECGReceiver>().floatGraph = FloatGraphComponent;
             Toggle toggle = ECGPeaksDotsToggle.GetComponent<Toggle>();
             toggle.interactable = true;
-            //SettingsStructure.PlotECG = true;
+            deviceSettings.PlotECG = true;
         }
         else
         {
@@ -197,7 +204,7 @@ public class DeviceController : MonoBehaviour
                 GameObject.Destroy(FloatPlotter);
             Toggle toggle = ECGPeaksDotsToggle.GetComponent<Toggle>();
             toggle.interactable = false;
-            //SettingsStructure.PlotECG = false;
+            deviceSettings.PlotECG = false;
         }
     }
     public void EnablePlottingDetectedPeaks(bool doReceive)
@@ -207,12 +214,12 @@ public class DeviceController : MonoBehaviour
         if (doReceive)
         {
             FloatGraphComponent.showDetectedPoitns = true;
-            //SettingsStructure.PlotDetectedPeaks = true;
+            deviceSettings.PlotDetectedPeaks = true;
         }
         else
         {
             FloatGraphComponent.showDetectedPoitns = false;
-            //SettingsStructure.PlotDetectedPeaks = false;
+            deviceSettings.PlotDetectedPeaks = false;
         }
     }
 }

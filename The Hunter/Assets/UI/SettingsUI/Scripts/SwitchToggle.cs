@@ -8,6 +8,7 @@ public class SwitchToggle : MonoBehaviour
     [SerializeField] RectTransform uiHandleRectTransform;
     [SerializeField] Color backgroundActiveColor;
     [SerializeField] Color handleActiveColor;
+    [SerializeField] Color handleInactiveColor;
 
     Image backgroundImage, handleImage;
 
