@@ -14,5 +14,6 @@ public class SaveButtonScript : MonoBehaviour
     {
         var deviceSettings = GetComponent<PanelEvents>().deviceSettings;
         deviceSettings.SaveSettings("device_settings.json");
+        BackToMenu();
     }
 }
