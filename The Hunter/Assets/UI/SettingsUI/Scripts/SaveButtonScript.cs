@@ -9,4 +9,10 @@ public class SaveButtonScript : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
+
+    public void SaveAndExit()
+    {
+        var deviceSettings = GetComponent<PanelEvents>().deviceSettings;
+        deviceSettings.SaveSettings("device_settings.json");
+    }
 }
