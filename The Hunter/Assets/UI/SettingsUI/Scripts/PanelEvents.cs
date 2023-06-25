@@ -19,55 +19,86 @@ public class PanelEvents : MonoBehaviour
     private void Start()
     {
         Toggle toggle;
-        deviceSettings = DeviceSettings.LoadSettings("device_settings.json");
-        if(deviceSettings != null )
-            Debug.Log("jest plik!");
-        else
-            deviceSettings = new DeviceSettings();
+        InitializeSettings();
 
         #region Toggles
         toggle = WearStateToggle.GetComponent<Toggle>();
         if (toggle != null)
+        {
             toggle.onValueChanged.AddListener(ReceiveWearState);
+            toggle.isOn = deviceSettings.WearState;
+        }
 
         toggle = HeartRateToggle.GetComponent<Toggle>();
         if (toggle != null)
+        {
             toggle.onValueChanged.AddListener(ReceiveHR);
-
+            toggle.isOn = deviceSettings.HeartRate;
+        }
         toggle = TemperatureToggle.GetComponent<Toggle>();
         if (toggle != null)
+        {
             toggle.onValueChanged.AddListener(ReceiveTemperature);
+            toggle.isOn = deviceSettings.Temperature;
+        }
 
         toggle = RespirationToggle.GetComponent<Toggle>();
         if (toggle != null)
+        {
             toggle.onValueChanged.AddListener(ReceiveRespiration);
-
+            toggle.isOn = deviceSettings.Respiration;
+        }
         toggle = RespirationRateToggle.GetComponent<Toggle>();
         if (toggle != null)
+        {
             toggle.onValueChanged.AddListener(ReceiveRespirationRate);
+            toggle.isOn = deviceSettings.RespirationRate;
+        }
 
         toggle = RRToggle.GetComponent<Toggle>();
         if (toggle != null)
+        {
             toggle.onValueChanged.AddListener(ReceiveRR);
+            toggle.isOn = deviceSettings.RR;
+        }
 
         toggle = PressureToggle.GetComponent<Toggle>();
         if (toggle != null)
+        {
             toggle.onValueChanged.AddListener(ReceivePressure);
+            toggle.isOn = deviceSettings.Pressure;
+        }
 
         toggle = OrientationToggle.GetComponent<Toggle>();
         if (toggle != null)
+        {
             toggle.onValueChanged.AddListener(ReceiveOrientation);
+            toggle.isOn = deviceSettings.Orientation;
+        }
 
         toggle = ECGPlotToggle.GetComponent<Toggle>();
         if (toggle != null)
+        {
             toggle.onValueChanged.AddListener(EnablePlotting);
+            toggle.isOn = deviceSettings.PlotECG;
+        }
 
         toggle = ECGPeaksDotsToggle.GetComponent<Toggle>();
         if (toggle != null)
+        {
             toggle.onValueChanged.AddListener(EnablePlottingDetectedPeaks);
+            toggle.isOn = deviceSettings.PlotDetectedPeaks;
+        }
 
         #endregion Toggles
 
+    }
+
+    public void InitializeSettings()
+    {
+        deviceSettings = DeviceSettings.LoadSettings("device_settings.json");
+        if (deviceSettings == null)
+            deviceSettings = new DeviceSettings();
     }
 
     public void ReceiveWearState(bool doReceive)
@@ -137,7 +168,7 @@ public class PanelEvents : MonoBehaviour
         else
         {
             Aidlab.AidlabSDK.aidlabDelegate.respirationRate.Unsubscribe(DeviceOnDataReceived.OnRespirationRateReceived);
-            deviceSettings.RespirationRate = false;            
+            deviceSettings.RespirationRate = false;
         }
     }
     public void ReceiveRR(bool doReceive)
