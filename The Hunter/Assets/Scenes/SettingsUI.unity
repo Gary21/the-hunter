@@ -260,6 +260,7 @@ MonoBehaviour:
   uiHandleRectTransform: {fileID: 1218497206}
   backgroundActiveColor: {r: 0, g: 1, b: 0.92096996, a: 1}
   handleActiveColor: {r: 1, g: 1, b: 1, a: 1}
+  handleInactiveColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &29612019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,6 +364,7 @@ MonoBehaviour:
   uiHandleRectTransform: {fileID: 1312577347}
   backgroundActiveColor: {r: 0, g: 1, b: 0.92096996, a: 1}
   handleActiveColor: {r: 1, g: 1, b: 1, a: 1}
+  handleInactiveColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &74693892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -579,6 +581,8 @@ GameObject:
   - component: {fileID: 125333330}
   - component: {fileID: 125333332}
   - component: {fileID: 125333331}
+  - component: {fileID: 125333333}
+  - component: {fileID: 125333334}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -654,6 +658,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 125333329}
   m_CullTransparentMesh: 1
+--- !u!114 &125333333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125333329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 385bffb4574f5974b9283aeaab5a94e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &125333334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125333329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7da3833bd9676db43897ce3a32d09ffe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WearStateToggle: {fileID: 682552911}
+  HeartRateToggle: {fileID: 74693889}
+  TemperatureToggle: {fileID: 1865187353}
+  RespirationToggle: {fileID: 2070406436}
+  RespirationRateToggle: {fileID: 29612016}
+  RRToggle: {fileID: 860915960}
+  PressureToggle: {fileID: 1506646752}
+  OrientationToggle: {fileID: 770279040}
+  ECGPlotToggle: {fileID: 1072425052}
+  ECGPeaksDotsToggle: {fileID: 472019031}
 --- !u!1 &234631199
 GameObject:
   m_ObjectHideFlags: 0
@@ -1110,6 +1148,7 @@ MonoBehaviour:
   uiHandleRectTransform: {fileID: 1365693583}
   backgroundActiveColor: {r: 0, g: 1, b: 0.92096996, a: 1}
   handleActiveColor: {r: 1, g: 1, b: 1, a: 1}
+  handleInactiveColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &472019034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1563,9 +1602,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 637611165}
+      - m_Target: {fileID: 125333333}
         m_TargetAssemblyTypeName: SaveButtonScript, Assembly-CSharp
-        m_MethodName: BackToMenu
+        m_MethodName: SaveAndExit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1728,6 +1767,7 @@ MonoBehaviour:
   uiHandleRectTransform: {fileID: 766941997}
   backgroundActiveColor: {r: 0, g: 1, b: 0.92096996, a: 1}
   handleActiveColor: {r: 1, g: 1, b: 1, a: 1}
+  handleInactiveColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &732307084
 GameObject:
   m_ObjectHideFlags: 0
@@ -1936,6 +1976,7 @@ MonoBehaviour:
   uiHandleRectTransform: {fileID: 234631200}
   backgroundActiveColor: {r: 0, g: 1, b: 0.92096996, a: 1}
   handleActiveColor: {r: 1, g: 1, b: 1, a: 1}
+  handleInactiveColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &770279043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2272,6 +2313,7 @@ MonoBehaviour:
   uiHandleRectTransform: {fileID: 814734899}
   backgroundActiveColor: {r: 0, g: 1, b: 0.92096996, a: 1}
   handleActiveColor: {r: 1, g: 1, b: 1, a: 1}
+  handleInactiveColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &860915963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2689,6 +2731,7 @@ MonoBehaviour:
   uiHandleRectTransform: {fileID: 1191771036}
   backgroundActiveColor: {r: 0, g: 1, b: 0.92096996, a: 1}
   handleActiveColor: {r: 1, g: 1, b: 1, a: 1}
+  handleInactiveColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1072425055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3329,6 +3372,7 @@ MonoBehaviour:
   uiHandleRectTransform: {fileID: 1911774537}
   backgroundActiveColor: {r: 0, g: 1, b: 0.92096996, a: 1}
   handleActiveColor: {r: 1, g: 1, b: 1, a: 1}
+  handleInactiveColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1506646755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3928,6 +3972,7 @@ MonoBehaviour:
   uiHandleRectTransform: {fileID: 1777356156}
   backgroundActiveColor: {r: 0, g: 1, b: 0.92096996, a: 1}
   handleActiveColor: {r: 1, g: 1, b: 1, a: 1}
+  handleInactiveColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1865187356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4107,6 +4152,7 @@ MonoBehaviour:
   uiHandleRectTransform: {fileID: 1312404151}
   backgroundActiveColor: {r: 0, g: 1, b: 0.92096996, a: 1}
   handleActiveColor: {r: 1, g: 1, b: 1, a: 1}
+  handleInactiveColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &2070406439
 MonoBehaviour:
   m_ObjectHideFlags: 0
