@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterHealth : MonoBehaviour
 {
@@ -33,7 +34,16 @@ public class CharacterHealth : MonoBehaviour
     {
         flashEffect.Flash();
         currentHealth -= damage;
-        if (currentHealth <= 0)
+        if (gameObject.tag == "Player" && currentHealth <= 0)
+        {
+            //call death animation
+            //call death screen
+            
+            Destroy(gameObject);
+            FindObjectOfType<GameOverMenu>().displayEndingScreen();
+            //SceneManager.LoadScene(1);
+        }
+        else if (currentHealth <= 0)
         {
             Destroy(gameObject);
         }
