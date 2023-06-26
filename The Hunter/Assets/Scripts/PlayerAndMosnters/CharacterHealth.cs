@@ -23,6 +23,10 @@ public class CharacterHealth : MonoBehaviour
     void hpRegenHandler()
     {
         currentHealth += baseHpRegen * hpRegenMultiplier * Time.deltaTime;
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
     }
 
     public void takeDamage(int damage)

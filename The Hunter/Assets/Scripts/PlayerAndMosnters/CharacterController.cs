@@ -19,6 +19,7 @@ public class CharacterController : MonoBehaviour
     public float groundCheckRadius;
     public LayerMask groundLayer;
     private bool isTouchingGround;
+    private bool doubleJump;
 
     float kbForce;
     float kbCounter;
@@ -103,14 +104,20 @@ public class CharacterController : MonoBehaviour
 
     void JumpHandler()
     {
-        if (Input.GetButtonDown("Jump") && isTouchingGround)
+        if (isTouchingGround)
         {
-            player.velocity = new Vector2(player.velocity.x, jumpSpeed);
+            doubleJump = true;
         }
-        
         if (Input.GetButtonDown("Jump") && isTouchingGround)
         {
             player.velocity = new Vector2(player.velocity.x, jumpSpeed);
+            doubleJump = true;
+        }
+
+        else if (Input.GetButtonDown("Jump") && doubleJump)
+        {
+            player.velocity = new Vector2(player.velocity.x, jumpSpeed);
+            doubleJump = false;
         }
     }
 
