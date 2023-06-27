@@ -3,18 +3,22 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ghouls
+  - Wizards
+  - Fireball
+  - Bats
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Wizards
   - Water
   - UI
   - Ground
+  - Fireballs
   - 
-  - 
-  - 
+  - Ghouls
   - 
   - 
   - 

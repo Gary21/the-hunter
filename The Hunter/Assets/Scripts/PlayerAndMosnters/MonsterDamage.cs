@@ -29,6 +29,10 @@ public class MonsterDamage : MonoBehaviour
         {
             movement.takeKnockback(knockBackPower, col.transform.position.x <= transform.position.x);
             health.takeDamage(damage);
+            if (gameObject.tag == "Fireball")
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
