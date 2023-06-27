@@ -20,6 +20,7 @@ public class CharacterController : MonoBehaviour
     public LayerMask groundLayer;
     private bool isTouchingGround;
     private bool doubleJump;
+    public int score = 0;
 
     float kbForce;
     float kbCounter;

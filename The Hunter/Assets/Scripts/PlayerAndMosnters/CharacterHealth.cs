@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,10 +10,12 @@ public class CharacterHealth : MonoBehaviour
     public float maxHealth = 100;
     public float baseHpRegen = 0;
     public float hpRegenMultiplier = 1.0f;
+    private Animator playerAnimator;
     [SerializeReference] private FlashEffect flashEffect;
     void Start()
     {
         currentHealth = maxHealth;
+        playerAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -30,7 +33,7 @@ public class CharacterHealth : MonoBehaviour
         }
     }
 
-    public void takeDamage(int damage)
+    public int takeDamage(int damage)
     {
         flashEffect.Flash();
         currentHealth -= damage;
@@ -43,9 +46,16 @@ public class CharacterHealth : MonoBehaviour
             FindObjectOfType<GameOverMenu>().displayEndingScreen();
             //SceneManager.LoadScene(1);
         }
-        else if (currentHealth <= 0)
+        else if (gameObject.tag == "Fireball")
         {
             Destroy(gameObject);
         }
+        else if (currentHealth <= 0)
+        {
+            playerAnimator.SetBool("isDying", true);
+            return 10;
+        }
+
+        return 0;
     }
 }
