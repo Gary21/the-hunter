@@ -12,7 +12,7 @@ public class HRCounterScript : MonoBehaviour
 
     [SerializeField] private GameObject[] spawnersObjects;
     [SerializeField] private GameObject characterControllerObject;
-    private EnemySpawner[] spawners;
+    private List<EnemySpawner> spawners = new List<EnemySpawner>();
     private CharacterHealth characterController;
 
 
