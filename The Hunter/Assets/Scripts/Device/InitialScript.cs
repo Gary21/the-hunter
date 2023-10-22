@@ -8,7 +8,7 @@ public class InitialScript : MonoBehaviour
 
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(this);
 
         if(instance == null)
         {
