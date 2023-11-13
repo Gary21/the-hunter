@@ -6,6 +6,7 @@ using System.Text;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.Events;
 
 namespace Aidlab.BLE
 {
@@ -14,7 +15,19 @@ namespace Aidlab.BLE
         private Dictionary<string, BLEApi.DeviceUpdate> devices;
         private string foundDevice;
         public Thread bleConnectorThread;
-        private BLEStatus currentBLEStatus = BLEStatus.None;
+        #region UnityDeviceStateEvents
+        public static UnityEvent<BLEStatus> deviceStatusChanged = new UnityEvent<BLEStatus>();
+        #endregion UnityDeviceStateEvents
+        private BLEStatus _currentBLEStatus = BLEStatus.None;
+        private BLEStatus currentBLEStatus
+        {
+            get { return _currentBLEStatus; }
+            set
+            {
+                _currentBLEStatus = value;
+                deviceStatusChanged.Invoke(_currentBLEStatus);
+            }
+        }
         private AidlabSDK aidlabSDK;
         private string deviceNameToConnect;      
         private bool isConnected = false;  
@@ -99,7 +112,6 @@ namespace Aidlab.BLE
         }
         #endregion MainMethods
 
-
         #region ScanningDevices
         private void StartDevicesScan()
         {
@@ -117,7 +129,6 @@ namespace Aidlab.BLE
                     if (!string.IsNullOrEmpty(foundDevice))
                     {
                         Debug.Log("Device found: " + foundDevice);
-
                         BLEApi.StopDeviceScan();
                         Thread.Sleep(256);
                         return;

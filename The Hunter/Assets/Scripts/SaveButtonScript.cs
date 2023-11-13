@@ -12,8 +12,8 @@ public class SaveButtonScript : MonoBehaviour
 
     public void SaveAndExit()
     {
-        var deviceSettings = GetComponent<PanelEvents>().deviceSettings;
-        deviceSettings.SaveSettings("device_settings.json");
+        // var DeviceSettings.Instance = GetComponent<PanelEvents>().DeviceSettings.Instance;
+        DeviceSettings.Instance.SaveSettings();
         BackToMenu();
     }
 }

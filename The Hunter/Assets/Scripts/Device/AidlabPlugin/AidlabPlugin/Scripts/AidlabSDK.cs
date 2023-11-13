@@ -224,7 +224,8 @@ namespace Aidlab
         }
 
         private void wear_state_c_callback(System.IntPtr context, byte wearState) 
-        { 
+        {
+            // Debug.Log("wear_state_c_callback");
             aidlabDelegate.WearStateDidChange((WearState)wearState); 
         }
 
@@ -246,7 +247,8 @@ namespace Aidlab
         }
 
         private void pressure_wear_state_c_callback(System.IntPtr context, byte pressureWearState)
-        { 
+        {
+            // Debug.Log("pressure_wear_state_c_callback");
             aidlabDelegate.PressureWearStateDidChange((WearState)pressureWearState); 
         }
 
