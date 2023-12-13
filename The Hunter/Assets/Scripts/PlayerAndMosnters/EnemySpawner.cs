@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private GameObject aggregator;
 
     [SerializeField] private float spawnInterval;
     public float intervalMultiplier;

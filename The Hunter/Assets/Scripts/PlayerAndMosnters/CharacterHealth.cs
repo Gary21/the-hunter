@@ -12,6 +12,7 @@ public class CharacterHealth : MonoBehaviour
     public float hpRegenMultiplier = 1.0f;
     private Animator playerAnimator;
     [SerializeReference] private FlashEffect flashEffect;
+    private float buffTimer = 0.0f;
     void Start()
     {
         currentHealth = maxHealth;
@@ -22,11 +23,13 @@ public class CharacterHealth : MonoBehaviour
     void Update()
     {
         hpRegenHandler();
+        buffTimer -= Time.deltaTime;
     }
 
     void hpRegenHandler()
     {
-        currentHealth += baseHpRegen * hpRegenMultiplier * Time.deltaTime;
+        var buffMultiplier = buffTimer > 0 ? 2 : 1;
+        currentHealth += baseHpRegen * hpRegenMultiplier * buffMultiplier * Time.deltaTime;
         if (currentHealth > maxHealth)
         {
             currentHealth = maxHealth;
@@ -57,5 +60,11 @@ public class CharacterHealth : MonoBehaviour
         }
 
         return 0;
+    }
+    
+    public void takeBuff()
+    {
+        currentHealth = maxHealth;
+        buffTimer = 15.0f;
     }
 }

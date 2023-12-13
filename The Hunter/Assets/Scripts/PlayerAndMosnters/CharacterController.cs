@@ -62,6 +62,8 @@ public class CharacterController : MonoBehaviour
     float kbForce;
     float kbCounter;
     bool knockFromRight;
+    private int ghoulsCounter = 0;
+    private float buffTimer = 0.0f;
 
     public float LastPressedJumpTime { get; private set; }
     public float LastPressedDashTime { get; private set; }
@@ -96,6 +98,7 @@ public class CharacterController : MonoBehaviour
     {
         SetGravityScale(Data.gravityScale);
         IsFacingRight = true;
+        StartCoroutine(countGhouls());
     }
 
     private void Update()
@@ -108,6 +111,7 @@ public class CharacterController : MonoBehaviour
 
         LastPressedJumpTime -= Time.deltaTime;
         LastPressedDashTime -= Time.deltaTime;
+        buffTimer -= Time.deltaTime;
         #endregion
 
         #region INPUT HANDLER
@@ -385,10 +389,16 @@ public class CharacterController : MonoBehaviour
 
         //Gets an acceleration value based on if we are accelerating (includes turning) 
         //or trying to decelerate (stop). As well as applying a multiplier if we're air borne.
+        var raa = (Data.runAccelAmount - 1.5f * ghoulsCounter) > 0
+            ? (Data.runAccelAmount - 1.5f * ghoulsCounter)
+            : 1.0f;
+        if (buffTimer > 0)
+            raa += 10.0f;
+        
         if (LastOnGroundTime > 0)
-            accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? Data.runAccelAmount : Data.runDeccelAmount;
+            accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? raa : Data.runDeccelAmount;
         else
-            accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? Data.runAccelAmount * Data.accelInAir : Data.runDeccelAmount * Data.deccelInAir;
+            accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? raa * Data.accelInAir : Data.runDeccelAmount * Data.deccelInAir;
         #endregion
 
         #region Add Bonus Jump Apex Acceleration
@@ -619,7 +629,7 @@ public class CharacterController : MonoBehaviour
     #endregion
     
     void AttackHandler()
-    {
+    { 
         if (Input.GetButtonDown("Fire1"))
         {
             isAttacking = true;
@@ -653,11 +663,11 @@ public class CharacterController : MonoBehaviour
     {
         if (knockFromRight)
         {      
-            RB.velocity = new Vector2(-kbForce, 0.2f * kbForce);
+            RB.velocity = new Vector2(-kbForce, 0.5f * kbForce);
         }
         else
         {
-            RB.velocity = new Vector2(kbForce, 0.2f * kbForce);
+            RB.velocity = new Vector2(kbForce, 0.5f * kbForce);
         }
 
         kbCounter -= Time.deltaTime;
@@ -668,5 +678,18 @@ public class CharacterController : MonoBehaviour
         knockFromRight = fromRight;
         kbForce = force;
         kbCounter = time;
+    }
+    
+    private IEnumerator countGhouls()
+    {
+        yield return new WaitForSeconds(1);
+        ghoulsCounter = GameObject.FindGameObjectsWithTag("Ghouls").Length;
+        StartCoroutine(countGhouls());
+    }
+
+    public void takeBuff()
+    {
+        buffTimer = 15.0f;
+        score += 15;
     }
 }
