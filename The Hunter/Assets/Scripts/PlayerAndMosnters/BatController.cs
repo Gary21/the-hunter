@@ -50,7 +50,7 @@ public class BatController : MonoBehaviour
     {
         if ((Mathf.Abs(velocity.x) >= moveSpeed || ( (direction < 0 && velocity.x < 0) || (direction > 0 && velocity.x > 0) )))
         {
-            return direction * moveSpeed * Random.Range(0.95f, 1.06f);
+            return direction * moveSpeed * Random.Range(0.85f, 1.16f);
         }
 
         else
