@@ -56,6 +56,7 @@ MonoBehaviour:
   ECGPlotToggle: {fileID: 4044552262131237308}
   ECGPeaksDotsToggle: {fileID: 4044552261398690899}
   ShowValuesToggle: {fileID: 439641661270119119}
+  ParametersControllerPrefab: {fileID: 1601078773520595798, guid: 383baddc31c1dd541b96cf53967e8c79, type: 3}
 --- !u!1001 &5370326328072814833
 PrefabInstance:
   m_ObjectHideFlags: 0

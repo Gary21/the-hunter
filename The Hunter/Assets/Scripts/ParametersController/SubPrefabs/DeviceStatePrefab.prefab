@@ -191,3 +191,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controll: {fileID: 8436377584509780886}
+  deviceSettingsPrefab: {fileID: 6723300284244136394, guid: eed772cba453dc0469fedc990813d8d7, type: 3}
