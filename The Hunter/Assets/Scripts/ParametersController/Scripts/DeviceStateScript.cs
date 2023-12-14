@@ -74,7 +74,7 @@ public class DeviceStateScript : MonoBehaviour, IPointerClickHandler
             controll.color = new Color32(147, 0, 0, 255);       // UNKNOWN STATE
     }
 
-    private string deviceSettingsPrefab = "Assets/Scripts/ParametersController/SubPrefabs/ParametersSettingsPrefab.prefab";
+    [SerializeField]private Object deviceSettingsPrefab;
     public void OnPointerClick(PointerEventData eventData)
     {
         GameObject root = gameObject.transform.parent.gameObject;
@@ -82,7 +82,7 @@ public class DeviceStateScript : MonoBehaviour, IPointerClickHandler
         if (settingsObj == null)
         {
             Debug.Log("NULL");
-            Object prefab = AssetDatabase.LoadAssetAtPath(deviceSettingsPrefab, typeof(GameObject));
+            Object prefab = deviceSettingsPrefab;
             settingsObj = Instantiate(prefab) as GameObject;
             settingsObj.name = "ParametersSettingsPrefab";
         }
