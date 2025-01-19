@@ -45,7 +45,7 @@ public class CharacterHealth : MonoBehaviour
             //call death animation
             //call death screen
             
-            Destroy(gameObject);
+            //Destroy(gameObject);
             FindObjectOfType<GameOverMenu>().displayEndingScreen();
             //SceneManager.LoadScene(1);
         }

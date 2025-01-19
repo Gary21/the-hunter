@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterController : MonoBehaviour
 {
@@ -64,6 +65,7 @@ public class CharacterController : MonoBehaviour
     bool knockFromRight;
     private int ghoulsCounter = 0;
     private float buffTimer = 0.0f;
+    public Joystick Joystick;
 
     public float LastPressedJumpTime { get; private set; }
     public float LastPressedDashTime { get; private set; }
@@ -115,18 +117,21 @@ public class CharacterController : MonoBehaviour
         #endregion
 
         #region INPUT HANDLER
-        _moveInput.x = Input.GetAxisRaw("Horizontal");
-        _moveInput.y = Input.GetAxisRaw("Vertical");
+        //_moveInput.x = Input.GetAxisRaw("Horizontal");
+        //_moveInput.y = Input.GetAxisRaw("Vertical");
+        
+        _moveInput.x = Joystick.Horizontal;
+        _moveInput.y = Joystick.Vertical;
 
         if (_moveInput.x != 0)
             CheckDirectionToFace(_moveInput.x > 0);
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) )
+        if (Input.GetButtonDown("Jump"))
         {
             OnJumpInput();
         }
 
-        if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W))
+        if (Input.GetButtonUp("Jump"))
         {
             OnJumpUpInput();
         }

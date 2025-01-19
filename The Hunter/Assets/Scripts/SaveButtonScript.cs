@@ -16,4 +16,9 @@ public class SaveButtonScript : MonoBehaviour
         DeviceSettings.Instance.SaveSettings();
         BackToMenu();
     }
+
+    public void Exit()
+    {
+        BackToMenu();
+    }
 }

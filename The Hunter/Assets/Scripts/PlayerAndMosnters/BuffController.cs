@@ -6,13 +6,13 @@ namespace PlayerAndMosnters
     {
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (!col.CompareTag("Player"))
+            if (!col.gameObject.CompareTag("Player"))
             {
                 return;
             }
-            col.GetComponent<CharacterController>().takeBuff();
-            col.GetComponent<CharacterAttack>().takeBuff();
-            col.GetComponent<CharacterHealth>().takeBuff();
+            col.gameObject.GetComponent<CharacterController>().takeBuff();
+            //col.gameObject.GetComponentInChildren<CharacterAttack>().takeBuff();
+            col.gameObject.GetComponent<CharacterHealth>().takeBuff();
             Destroy(gameObject);
         }
     }

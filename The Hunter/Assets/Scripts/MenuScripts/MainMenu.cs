@@ -19,4 +19,9 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Quit!");
         Application.Quit();
     }
+
+    public void HowTo()
+    {
+        SceneManager.LoadScene("howto");
+    }
 }
