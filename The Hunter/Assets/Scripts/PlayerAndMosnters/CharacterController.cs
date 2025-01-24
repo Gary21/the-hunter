@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -633,14 +634,19 @@ public class CharacterController : MonoBehaviour
     }
     #endregion
     
+    Boolean isHoldingAttackButton = false;
+    public void SetIsHoldingAttackButton(Boolean value) { isHoldingAttackButton = value; }
+
     void AttackHandler()
     { 
-        if (Input.GetButtonDown("Fire1"))
+        //if (Input.GetButtonDown("Fire1"))
+        if (isHoldingAttackButton)
         {
             isAttacking = true;
             attackArea.SetActive(isAttacking);
         }
-        if (Input.GetButtonUp("Fire1"))
+        //if (Input.GetButtonUp("Fire1"))
+        if (!isHoldingAttackButton)
         {
             isAttacking = false;
             attackArea.SetActive(isAttacking);
